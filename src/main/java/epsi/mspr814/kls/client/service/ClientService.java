@@ -2,13 +2,11 @@ package epsi.mspr814.kls.client.service;
 
 import epsi.mspr814.kls.client.model.Person;
 import epsi.mspr814.kls.client.repository.PersonRepository;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Data
 @Service
 public class ClientService {
 

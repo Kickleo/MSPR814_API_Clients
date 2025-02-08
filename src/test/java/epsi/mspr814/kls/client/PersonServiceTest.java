@@ -38,13 +38,13 @@ public class PersonServiceTest {
 
     @Test
     void testCreateClient() {
-        Person person = new Person(null, "John Doe", "john.doe@example.com", "1234567890", "123 Main St");
+        Person person = new Person(null, "John", "Doe",  "john.doe@example.com", "1234567890", "123 Main St", "password");
 
-        when(personRepository.save(person)).thenReturn(new Person(new UUID(12,15), "John Doe", "john.doe@example.com", "1234567890", "123 Main St"));
+        when(personRepository.save(person)).thenReturn(new Person(new UUID(12,15), "John", "Doe",  "john.doe@example.com", "1234567890", "123 Main St", "password"));
 
 
-        Person savedPerson = clientService.createClient(person);
+        Person savedPerson = clientService.savePerson(person);
         assertNotNull(savedPerson.getUuid());
-        assertEquals("John Doe", savedPerson.getName());
+        assertEquals("John", savedPerson.getFirstName());
     }
 }
