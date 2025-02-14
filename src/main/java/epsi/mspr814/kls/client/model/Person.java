@@ -1,93 +1,48 @@
 package epsi.mspr814.kls.client.model;
 
 import jakarta.persistence.*;
+import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
+/**
+ * Represents a Person entity.
+ */
 @Entity
-@Table(name = "persons")
+@Table(name = "person")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Person {
     @Id
-    @GeneratedValue
-    private UUID uuid;
+    @GeneratedValue(generator = "UUID")
+    @UuidGenerator
+    private UUID id;
 
-    @Column(name="first_name")
+    private String username;
     private String firstName;
-
-    @Column(name="last_name")
     private String lastName;
-    private String email;
     private String phone;
-    private String address;
+    private String email;
     private String password;
 
-    public Person(UUID uuid, String firstName, String lastName, String email, String phone, String address, String password) {
-        this.uuid = uuid;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
-        this.address = address;
-        this.password = password;
-    }
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Address> addresses;
 
-    public Person() {
+    @OneToOne(cascade = CascadeType.ALL)
+    private Professional professional;
 
-    }
-
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "person_role",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 }
