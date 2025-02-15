@@ -77,7 +77,9 @@ jobs:
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build Docker image
-        run: docker build -t leotepedelen/clients:${{ github.sha }} .
+        run: docker build -t leotepedelen/clients:${{ github.sha }} -t leotepedelen/clients:latest .
 
       - name: Push Docker image
-        run: docker push leotepedelen/clients:${{ github.sha }}
+        run: |
+          docker push leotepedelen/clients:${{ github.sha }}
+          docker push leotepedelen/clients:latest
