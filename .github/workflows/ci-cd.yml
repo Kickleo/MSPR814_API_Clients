@@ -53,7 +53,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       
       - name: Build Spring API
-        run: mvn clean package
+        run: mvn clean package -Dspring.profiles.active=test
 
       # - name: Run Dependency Check
       #   run: mvn verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
@@ -62,7 +62,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           # -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Kickleo_MSPR814_API_Clients -Dsonar.organization=kickleo-1 -Dsonar.host.url=https://sonarcloud.io
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Kickleo_MSPR814_API_Clients -Dsonar.organization=kickleo-1 -Dsonar.host.url=https://sonarcloud.io -Dspring.profiles.active=test
 
       - name: Upload Dependency Check Report
         uses: actions/upload-artifact@v4
@@ -71,7 +71,7 @@ jobs:
           path: target/dependency-check-report.html
 
       - name: Run tests
-        run: mvn test
+        run: mvn test -Dspring.profiles.active=test
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
