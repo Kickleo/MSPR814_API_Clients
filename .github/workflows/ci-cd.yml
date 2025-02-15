@@ -25,18 +25,18 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
     
-      - name: Create Dependency Check Cache Directory
-        run: mkdir -p ~/.dependency-check/data
+      # - name: Create Dependency Check Cache Directory
+      #   run: mkdir -p ~/.dependency-check/data
 
-      - name: Cache OWASP Dependency-Check Data
-        uses: actions/cache@v4
-        with:
-          # Chemin par défaut utilisé par Dependency Check sur le runner
-          path: ~/.dependency-check/data
-          # Clé basée sur le système d'exploitation et un hash du pom.xml
-          key: dependency-check-${{ runner.os }}-${{ hashFiles('**/OWASPDepCheckVers') }}
-          restore-keys: |
-            dependency-check-${{ runner.os }}-
+      # - name: Cache OWASP Dependency-Check Data
+      #   uses: actions/cache@v4
+      #   with:
+      #     # Chemin par défaut utilisé par Dependency Check sur le runner
+      #     path: ~/.dependency-check/data
+      #     # Clé basée sur le système d'exploitation et un hash du pom.xml
+      #     key: dependency-check-${{ runner.os }}-${{ hashFiles('**/OWASPDepCheckVers') }}
+      #     restore-keys: |
+      #       dependency-check-${{ runner.os }}-
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
@@ -61,7 +61,8 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }} org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Kickleo_MSPR814_API_Clients -Dsonar.organization=kickleo-1 -Dsonar.host.url=https://sonarcloud.io
+          # -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Kickleo_MSPR814_API_Clients -Dsonar.organization=kickleo-1 -Dsonar.host.url=https://sonarcloud.io
 
       - name: Upload Dependency Check Report
         uses: actions/upload-artifact@v4
