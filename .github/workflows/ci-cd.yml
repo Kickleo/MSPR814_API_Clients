@@ -26,8 +26,18 @@ jobs:
       - name: Build Spring API
         run: mvn clean package
 
+      - name: Cache OWASP Dependency-Check Data
+        uses: actions/cache@v3
+        with:
+          # Chemin par défaut utilisé par Dependency Check sur le runner
+          path: ~/.dependency-check
+          # Clé basée sur le système d'exploitation et un hash du pom.xml
+          key: dependency-check-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            dependency-check-${{ runner.os }}-
+
       - name: Run Dependency Check
-        run: mvn verify -Ddependency-check.nvd.api.key=${{ secrets.NVD_API_KEY }}
+        run: mvn verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
 
       - name: Upload Dependency Check Report
         uses: actions/upload-artifact@v4
