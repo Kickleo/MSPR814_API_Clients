@@ -26,16 +26,16 @@ jobs:
       - name: Build Spring API
         run: mvn clean package
     
-      - name: Create Dependency Check Cache Directory
-        run: mkdir -p ~/.dependency-check
+      # - name: Create Dependency Check Cache Directory
+      #   run: mkdir -p ~/.dependency-check/data
 
       - name: Cache OWASP Dependency-Check Data
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           # Chemin par défaut utilisé par Dependency Check sur le runner
-          path: ~/.dependency-check
+          path: ~/.dependency-check/data
           # Clé basée sur le système d'exploitation et un hash du pom.xml
-          key: dependency-check-${{ runner.os }}-${{ hashFiles('**/pom.xml') }}
+          key: dependency-check-${{ runner.os }}-${{ hashFiles('**/OWASPDepCheckVers') }}
           restore-keys: |
             dependency-check-${{ runner.os }}-
 
