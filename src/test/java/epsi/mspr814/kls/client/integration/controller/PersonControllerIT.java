@@ -1,4 +1,4 @@
-package epsi.mspr814.kls.client.IntTest.controller;
+package epsi.mspr814.kls.client.integration.controller;
 
 import epsi.mspr814.kls.client.model.Person;
 import epsi.mspr814.kls.client.repository.PersonRepository;

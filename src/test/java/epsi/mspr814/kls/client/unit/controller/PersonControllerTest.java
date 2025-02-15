@@ -1,4 +1,4 @@
-package epsi.mspr814.kls.client.UnitTest.controller;
+package epsi.mspr814.kls.client.unit.controller;
 
 import epsi.mspr814.kls.client.controller.PersonController;
 import epsi.mspr814.kls.client.dto.RegisterPersonDTO;
