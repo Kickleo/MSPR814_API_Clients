@@ -107,6 +107,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                    <dataDirectory>${user.home}/.dependency-check/data</dataDirectory>
                     <!-- gGénérer un rapport HTML -->
                     <format>HTML</format>
                     <!-- Chemin où enregistrer le rapport -->
