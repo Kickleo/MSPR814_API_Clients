@@ -26,6 +26,15 @@ jobs:
       - name: Build Spring API
         run: mvn clean package
 
+      - name: Run Dependency Check
+        run: mvn verify -Ddependency-check.nvd.api.key=${{ secrets.NVD_API_KEY }}
+
+      - name: Upload Dependency Check Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: dependency-check-report
+          path: target/dependency-check-report.html
+
       - name: Run tests
         run: mvn test
 #
