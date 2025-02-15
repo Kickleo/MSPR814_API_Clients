@@ -42,6 +42,16 @@ jobs:
       - name: Run Dependency Check
         run: mvn verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
 
+      - name: SonarCloud Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: >
+          mvn sonar:sonar
+          -Dsonar.projectKey=your_project_key
+          -Dsonar.organization=your_organization
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+
       - name: Upload Dependency Check Report
         uses: actions/upload-artifact@v4
         with:
