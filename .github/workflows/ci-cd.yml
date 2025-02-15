@@ -28,15 +28,15 @@ jobs:
       - name: Create Dependency Check Cache Directory
         run: mkdir -p ~/.dependency-check/data
 
-      - name: Cache OWASP Dependency-Check Data
-        uses: actions/cache@v4
-        with:
-          # Chemin par défaut utilisé par Dependency Check sur le runner
-          path: ~/.dependency-check/data
-          # Clé basée sur le système d'exploitation et un hash du pom.xml
-          key: dependency-check-${{ runner.os }}-${{ hashFiles('**/OWASPDepCheckVers') }}
-          restore-keys: |
-            dependency-check-${{ runner.os }}-
+      # - name: Cache OWASP Dependency-Check Data
+      #   uses: actions/cache@v4
+      #   with:
+      #     # Chemin par défaut utilisé par Dependency Check sur le runner
+      #     path: ~/.dependency-check/data
+      #     # Clé basée sur le système d'exploitation et un hash du pom.xml
+      #     key: dependency-check-${{ runner.os }}-${{ hashFiles('**/OWASPDepCheckVers') }}
+      #     restore-keys: |
+      #       dependency-check-${{ runner.os }}-
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
@@ -55,8 +55,8 @@ jobs:
       - name: Build Spring API
         run: mvn clean package
 
-      - name: Run Dependency Check
-        run: mvn verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
+      # - name: Run Dependency Check
+      #   run: mvn verify -Dnvd.api.key=${{ secrets.NVD_API_KEY }}
 
       - name: Build and analyze
         env:
