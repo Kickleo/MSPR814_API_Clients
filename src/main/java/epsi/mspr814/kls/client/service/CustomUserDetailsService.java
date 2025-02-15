@@ -1,4 +1,4 @@
-package epsi.mspr814.kls.client.security;
+package epsi.mspr814.kls.client.service;
 
 import epsi.mspr814.kls.client.model.Person;
 import epsi.mspr814.kls.client.repository.PersonRepository;
