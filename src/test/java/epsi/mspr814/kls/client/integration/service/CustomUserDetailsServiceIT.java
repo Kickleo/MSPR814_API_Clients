@@ -18,7 +18,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-class CustomUserDetailsServiceIntegrationTest {
+class CustomUserDetailsServiceIT {
 
     @Autowired
     private PersonRepository personRepository;
