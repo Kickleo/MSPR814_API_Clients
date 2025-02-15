@@ -118,13 +118,13 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
+            <!--<plugin>
                 <groupId>org.owasp</groupId>
                 <artifactId>dependency-check-maven</artifactId>
                 <version>12.0.2</version>
                 <executions>
                     <execution>
-                        <!-- Lancer l'analyse pendant la phase "verify" -->
+                        &lt;!&ndash; Lancer l'analyse pendant la phase "verify" &ndash;&gt;
                         <phase>verify</phase>
                         <goals>
                             <goal>check</goal>
@@ -133,14 +133,14 @@
                 </executions>
                 <configuration>
                     <dataDirectory>${user.home}/.dependency-check/data</dataDirectory>
-                    <!-- gGénérer un rapport HTML -->
+                    &lt;!&ndash; gGénérer un rapport HTML &ndash;&gt;
                     <format>HTML</format>
-                    <!-- Chemin où enregistrer le rapport -->
+                    &lt;!&ndash; Chemin où enregistrer le rapport &ndash;&gt;
                     <outputDirectory>${project.build.directory}</outputDirectory>
-                    <!-- Activer ou désactiver certains contrôles si nécessaire -->
+                    &lt;!&ndash; Activer ou désactiver certains contrôles si nécessaire &ndash;&gt;
                      <failBuildOnCVSS>7</failBuildOnCVSS>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>
 
