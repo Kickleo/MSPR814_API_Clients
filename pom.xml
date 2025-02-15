@@ -67,7 +67,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>annotationProcessor</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -93,6 +92,28 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>12.0.2</version>
+                <executions>
+                    <execution>
+                        <!-- Lancer l'analyse pendant la phase "verify" -->
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- gGénérer un rapport HTML -->
+                    <format>HTML</format>
+                    <!-- Chemin où enregistrer le rapport -->
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <!-- Activer ou désactiver certains contrôles si nécessaire -->
+                     <failBuildOnCVSS>7</failBuildOnCVSS>
+                </configuration>
             </plugin>
         </plugins>
     </build>
