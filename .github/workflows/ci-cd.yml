@@ -26,8 +26,8 @@ jobs:
       - name: Build Spring API
         run: mvn clean package
     
-      # - name: Create Dependency Check Cache Directory
-      #   run: mkdir -p ~/.dependency-check/data
+      - name: Create Dependency Check Cache Directory
+        run: mkdir -p ~/.dependency-check/data
 
       - name: Cache OWASP Dependency-Check Data
         uses: actions/cache@v4
